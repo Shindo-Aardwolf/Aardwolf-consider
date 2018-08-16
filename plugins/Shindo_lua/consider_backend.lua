@@ -20,10 +20,10 @@ local bcyan = "\27[36;1m"
 local bwhite = "\27[37;1m"
 
 --Plugin Variables
-local auto_conw = 0
+local AUTO_CONW = 0
 local default_command = "k"
-local doing_consider = 0
-local version = "0.0.5"
+local DOING_CONSIDER = 0
+local version = "0.1.1"
 local targT = {}
 local targCount = 0
 local ECHO_CONSIDER = 0
@@ -69,17 +69,20 @@ function Conw (argu)
   if argu == "help" or argu == "?" then
     conw_help = {
       "conw - update window with consider all command.",
-      "conw off - emergency shut off procedure",
-      "conw echo - toggle echoing consider message in colour",
+      "conw off - emergency shut off procedure.",
+      "conw echo - toggle echoing consider message in colour.",
       "conw <word> - set default command.",
       "conw auto - toggle auto update consider window on room entry and after combat.",
-      "conw ?/help - show this help."
+      "conw ?/help - show this help.",
+      "ck <number> - attack mob number <number> in the list generated.",
+      "ck - show the last generated list of mobs."
     }
     for i,v in ipairs (conw_help) do
       sSpa = string.rep (" ", 12 - v:sub(1,v:find("-") - 1):len() )
       Note(string.format("%s%s%s",dyellow, v:sub(1,v:find("-") - 1), sSpa ))
       Note(string.format("%s%s\n", dwhite, v:sub(v:find("-"), v:len())))
     end
+
     return
   end  -- show help
 
@@ -96,19 +99,21 @@ function Conw (argu)
       ECHO_CONSIDER = 1
       Note(string.format("%sTurning on consider echoing.%s\n", byellow, dwhite))
     end
+
     return
   end
 
   if argu == "auto" then
-    if auto_conw == 1 then
-      auto_conw = 0
+    if AUTO_CONW == 1 then
+      AUTO_CONW = 0
       EnableTriggerGroup ("auto_consider", 0)
       Note(string.format ("%sAuto consider off.%s\n", bblue, dwhite))
     else
-      auto_conw = 1
+      AUTO_CONW = 1
       EnableTriggerGroup ("auto_consider", 1)
       Note(string.format ("%sAuto consider on.%s\n", bblue, dwhite))
     end
+
     return
   end -- toggle auto
 
@@ -126,20 +131,22 @@ function attack_considered(targNum)
   else
     Note(string.format("%sYou need to select a number from 1 to %s%s\n", dyellow, targCount, dwhite))
   end
+
 end
 
 function send_consider ()
   --Note("startup.\n")
-  if doing_consider == 1 then
+  if DOING_CONSIDER == 1 then
     return
   else
     EnableTriggerGroup ("Cons", true)
-    doing_consider = 1
+    DOING_CONSIDER = 1
     SendToServer ("consider all")
     SendToServer ("echo nhm")
     targT = {}
     targCount = 0
   end
+
 end -- send_consider
 
 function getKeyword(mob)
@@ -149,10 +156,12 @@ function getKeyword(mob)
       nameCount = nameCount + 1
     end
   end
+
   mob = stripname(mob)
   if nameCount > 1 then
     mob = string.format("%s.%s", tostring(nameCount), mob)
   end
+
   return mob
 end
 
@@ -175,11 +184,14 @@ function adapt_consider (name, line, wildcards)
       if ECHO_CONSIDER == 1 then
         Note(string.format("%s%s(%s)%s\n" , v.colour, t.line,  v.range, dwhite ))
       end
+
       table.insert (targT, t)
       targCount = targCount + 1
       break
     end -- if
+
   end -- for
+
 end -- adapt_consider
 
 function player_only()
@@ -194,15 +206,16 @@ function Show_Consider()
   for i,v in ipairs (targT) do
     Note(string.format("%2s. %-30s %s%s%s\n", i, v.name, v.colour, v.range, dwhite))
   end
-  doing_consider = 0
+
+  DOING_CONSIDER = 0
   EnableTriggerGroup ("Cons", false)
 end -- Show_Consider
 
 function OnBackgroundStartup()
   Note(string.format("%sShindo's Consider Plugin version: %s%s%s\n", dgreen, bgreen, version, dwhite))
-  doing_consider = 0
+  DOING_CONSIDER = 0
   EnableTriggerGroup("Cons",false)
   targT = {}
 end
 
-Note(string.format("%sConsider Plugin installed%s\n", dgreen, dwhite))
+Note(string.format("%sShindo's Consider Plugin installed%s\n", dgreen, dwhite))
