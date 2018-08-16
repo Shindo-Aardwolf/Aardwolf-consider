@@ -17,7 +17,8 @@
 
           <body>
             <h3>Room Consider Lister</h3)
-            <p>Creates a list from which to pick your target in the room. Can be set to update on death of a mob</p>
+            <p>Creates a list from which to pick your target in the room.</p>
+            <p>see <b>conw help</b> for a summary of the commands.</p>
           </body>
         </html>
         ]]>
