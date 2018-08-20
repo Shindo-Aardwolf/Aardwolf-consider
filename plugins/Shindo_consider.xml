@@ -116,7 +116,7 @@
           <gag />
         </trigger>
         <trigger title="ac13"
-          pattern ="^(.*?You would be completely annihilated by .*)\!$"
+          pattern ="^(.*?You would be completely annihilated by .*\!)$"
           regexp="true" sequence="1" group="Cons" keepEvaluting="true">
           <replace fireWhen="always"></replace>
           <script function="adapt_consider" fireWhen="always" />
@@ -126,13 +126,17 @@
         <trigger title="playerOnly"
           pattern ="^You see no one here but yourself\!$"
           regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+          <replace fireWhen="always"></replace>
           <script function="player_only" fireWhen="always" />
+          <gag />
         </trigger>
         <!-- Trigger for when the player is in a safe room -->
         <trigger title="safeRoom"
           pattern ="^Strange forces prevent violence here\.$"
           regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+          <replace fireWhen="always"></replace>
           <script function="safe_room" fireWhen="always" />
+          <gag />
         </trigger>
         <!-- Trigger for the end of consider -->
         <trigger title="conw_off"
@@ -141,6 +145,30 @@
           <replace fireWhen="always"></replace>
           <script function="Show_Consider" fireWhen="always" />
           <gag />
+        </trigger>
+        <!-- Trigger for death of a mob -->
+        <trigger title="mob_died_xpgained"
+          pattern ="^You receive .* experience point.*$"
+          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+          <script function="send_consider" fireWhen="always" />
+        </trigger>
+        <!-- Trigger for death of a mob -->
+        <trigger title="mob_died_noxp"
+          pattern ="^That was a pointless no-experience kill\!$"
+          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+          <script function="send_consider" fireWhen="always" />
+        </trigger>
+        <!-- Trigger for fleeing mob -->
+        <trigger title="mob_fled"
+          pattern ="^A .* has fled\!$"
+          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+          <script function="send_consider" fireWhen="always" />
+        </trigger>
+        <!-- Trigger for entering a new room -->
+        <trigger title="player_moved"
+          pattern ="^\[ Exits\:.*$"
+          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+          <script function="send_consider" fireWhen="always" />
         </trigger>
       </triggers>
       <script name="bootstrap"><![CDATA[

@@ -23,7 +23,7 @@ local bwhite = "\27[37;1m"
 local AUTO_CONW = 0
 local default_command = "k"
 local DOING_CONSIDER = 0
-local version = "0.1.1"
+local version = "0.1.2"
 local targT = {}
 local targCount = 0
 local ECHO_CONSIDER = 0
@@ -106,11 +106,11 @@ function Conw (argu)
   if argu == "auto" then
     if AUTO_CONW == 1 then
       AUTO_CONW = 0
-      EnableTriggerGroup ("auto_consider", 0)
+      EnableTriggerGroup ("Auto_Conw", false)
       Note(string.format ("%sAuto consider off.%s\n", bblue, dwhite))
     else
       AUTO_CONW = 1
-      EnableTriggerGroup ("auto_consider", 1)
+      EnableTriggerGroup ("Auto_Conw", true)
       Note(string.format ("%sAuto consider on.%s\n", bblue, dwhite))
     end
 
@@ -195,7 +195,7 @@ function adapt_consider (name, line, wildcards)
 end -- adapt_consider
 
 function player_only()
-  Note(string.format("%sAre you lonely?%s\n", dyellow, dwhite))
+  Note(string.format("%sYup, it's just you here!%s\n", dyellow, dwhite))
 end
 
 function safe_room()
@@ -214,7 +214,8 @@ end -- Show_Consider
 function OnBackgroundStartup()
   Note(string.format("%sShindo's Consider Plugin version: %s%s%s\n", dgreen, bgreen, version, dwhite))
   DOING_CONSIDER = 0
-  EnableTriggerGroup("Cons",false)
+  EnableTriggerGroup("Cons", false)
+  EnableTriggerGroup("Auto_Conw", false)
   targT = {}
 end
 
