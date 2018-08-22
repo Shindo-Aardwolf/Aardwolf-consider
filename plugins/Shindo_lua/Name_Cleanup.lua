@@ -2,6 +2,13 @@ function stripname(nametostrip, CurrentZone)
   --dirty_string = dirty_string:gsub("", "")
 
   local dirty_string = nametostrip
+	while string.match(dirty_string,[=[[?!",]]=]) do -- Pull out ? and ! - Kobus
+		dirty_string = string.gsub(dirty_string,"%?","")
+		dirty_string = string.gsub(dirty_string,"!","")
+		dirty_string = string.gsub(dirty_string,",","")
+		dirty_string = string.gsub(dirty_string,[=["]=],"")
+		dirty_string = string.gsub(dirty_string,[=["]=],"")
+	end -- Stripping ? ! " and , from mob names -- Kobus
 
   --example of using CurrentZone to change a string
   if CurrentZone =="Takeda's Warcamp" then
@@ -22,9 +29,6 @@ function stripname(nametostrip, CurrentZone)
   dirty_string = dirty_string:gsub(" [Tt]he ", " ")
   dirty_string = dirty_string:gsub("'s ", " ")
   dirty_string = dirty_string:gsub("'", "")
-  dirty_string = dirty_string:gsub(", ", " ")
-  dirty_string = dirty_string:gsub("%?%?%?%!%!%!", "")
-  dirty_string = dirty_string:gsub("%?%?%!%!", "")
   dirty_string = dirty_string:gsub("%. ", " ")
   local CleanTarget = dirty_string
   return CleanTarget

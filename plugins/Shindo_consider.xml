@@ -146,14 +146,20 @@
           <script function="Show_Consider" fireWhen="always" />
           <gag />
         </trigger>
-        <!-- Trigger for death of a mob -->
+        <!-- Trigger for death of a mob with xp -->
         <trigger title="mob_died_xpgained"
           pattern ="^You receive .* experience point.*$"
           regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
           <script function="send_consider" fireWhen="always" />
         </trigger>
-        <!-- Trigger for death of a mob -->
-        <trigger title="mob_died_noxp"
+        <!-- Trigger for death of a mob with noxp toggled -->
+        <trigger title="mob_died_noxpgained"
+          pattern ="^You have set your character to receive no experience points!$"
+          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+          <script function="send_consider" fireWhen="always" />
+        </trigger>
+        <!-- Trigger for death of a mob pointless kill -->
+        <trigger title="mob_died_pointless"
           pattern ="^That was a pointless no-experience kill\!$"
           regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
           <script function="send_consider" fireWhen="always" />

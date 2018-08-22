@@ -19,6 +19,23 @@ local bmagenta = "\27[35;1m"
 local bcyan = "\27[36;1m"
 local bwhite = "\27[37;1m"
 
+-- make an array of colours using "bred" etc as key and the ansi codes as the data
+local colourArray = {
+  ["dred"] = "\27[0;31m",
+  ["dgreen"] = "\27[0;32m",
+  ["dyellow"] = "\27[0;33m",
+  ["dblue"] = "\27[0;34m",
+  ["dmagenta"] = "\27[0;35m",
+  ["dcyan"] = "\27[0;36m",
+  ["dwhite"] = "\27[0;37m",
+  ["bred"] = "\27[31;1m",
+  ["bgreen"] = "\27[32;1m",
+  ["byellow"] = "\27[33;1m",
+  ["bblue"] = "\27[34;1m",
+  ["bmagenta"] = "\27[35;1m",
+  ["bcyan"] = "\27[36;1m",
+  ["bwhite"] = "\27[37;1m",
+}
 --Plugin Variables
 local AUTO_CONW = 0
 local default_command = "k"
