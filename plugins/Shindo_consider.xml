@@ -24,9 +24,9 @@
         ]]>
       </description>
       <aliases>
-        <alias pre="^conw (.*?)$" post="/Conw(&apos;$1&apos;)" enabled="true" />
+        <alias pre="^conw (.*?)$" post="/Conw(&quot;$1&quot;)" enabled="true" />
         <alias pre="^conw$" post="/send_consider()" enabled="true" />
-        <alias pre="^ck (\d+)$" post="/attack_considered(&apos;$1&apos;)" enabled="true" />
+        <alias pre="^ck (\d+)$" post="/attack_considered(&quot;$1&quot;)" enabled="true" />
         <alias pre="^ck$" post="/attack_considered()" enabled="true" />
       </aliases>
       <triggers>
@@ -148,7 +148,7 @@
         </trigger>
         <!-- Trigger for death of a mob with xp -->
         <trigger title="mob_died_xpgained"
-          pattern ="^You receive .* experience point.*$"
+          pattern ="^You receive .* experience points?\.$"
           regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
           <script function="send_consider" fireWhen="always" />
         </trigger>

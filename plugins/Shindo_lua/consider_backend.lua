@@ -38,9 +38,10 @@ local colourArray = {
 }
 --Plugin Variables
 local AUTO_CONW = 0
+local ENTRY_CONW = 0
 local default_command = "k"
 local DOING_CONSIDER = 0
-local version = "0.1.2"
+local version = "0.1.5"
 local targT = {}
 local targCount = 0
 local ECHO_CONSIDER = 0
@@ -134,7 +135,8 @@ function Conw (argu)
     return
   end -- toggle auto
 
-  if argu and argu:match ("^%w+$") then
+  --[[  if argu and argu:match ("^%w+$") then --]]
+  if argu and argu:match ("^.+$") then 
     default_command = argu
     Note(string.format("%sDefault command: %s%s%s\n", dblue, bblue, default_command, dwhite))
   end  -- set default kill command
@@ -144,7 +146,8 @@ function attack_considered(targNum)
   if targNum == nil then Show_Consider() return end
   targNum = tonumber(targNum) or 0
   if (targNum > 0) and (targNum < targCount + 1) then
-    SendToServer(string.format("%s %s", default_command, targT[targNum].keyword))
+    SendToServer(string.format("%s \'%s\'", default_command, targT[targNum].keyword))
+    --SendToServer(string.format("echo %s \'%s\'", default_command, targT[targNum].keyword))
   else
     Note(string.format("%sYou need to select a number from 1 to %s%s\n", dyellow, targCount, dwhite))
   end
@@ -175,6 +178,7 @@ function getKeyword(mob)
   end
 
   mob = stripname(mob)
+  --Note(string.format("%s%s%s\n", dblue, mob, dwhite))
   if nameCount > 1 then
     mob = string.format("%s.%s", tostring(nameCount), mob)
   end
