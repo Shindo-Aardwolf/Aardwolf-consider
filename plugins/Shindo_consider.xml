@@ -1,189 +1,189 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <blowtorch xmlversion="2">
-  <plugins>
-    <plugin name="shindo_consider" id="53">
-      <author>Shindo</author>
-      <description><![CDATA[
-        <html>
-          <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <title>Shindo Consider Plugin</title>
-            <style type="text/css">
-              body {
-              color: #999;
-              }
-            </style>
-          </head>
+	<plugins>
+		<plugin name="shindo_consider" id="53">
+			<author>Shindo</author>
+			<description><![CDATA[
+				<html>
+					<head>
+						<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+						<title>Shindo Consider Plugin</title>
+						<style type="text/css">
+							body {
+							color: #999;
+							}
+						</style>
+					</head>
 
-          <body>
-            <h3>Room Consider Lister</h3)
-            <p>Creates a list from which to pick your target in the room.</p>
-            <p>see <b>conw help</b> for a summary of the commands.</p>
-          </body>
-        </html>
-        ]]>
-      </description>
-      <aliases>
-        <alias pre="^conw (.*?)$" post="/Conw(&quot;$1&quot;)" enabled="true" />
-        <alias pre="^conw$" post="/send_consider()" enabled="true" />
-        <alias pre="^ck (\d+)$" post="/attack_considered(&quot;$1&quot;)" enabled="true" />
-        <alias pre="^ck$" post="/attack_considered()" enabled="true" />
-      </aliases>
-      <triggers>
-        <!-- Triggers for each of the consider messages -->
-        <trigger title="ac1"
-          pattern ="^(.*?You would stomp .* into the ground\.)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac2"
-          pattern ="^(.* would be easy\, but is it even worth the work out\?)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac3"
-          pattern ="^(.*?No Problem! .* is weak compared to you\.)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac4"
-          pattern ="^(.* looks a little worried about the idea\.)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac5"
-          pattern ="^(.* should be a fair fight\!)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac6"
-          pattern ="^(.* snickers nervously\.)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac7"
-          pattern ="^(.*? chuckles at the thought of you fighting .*\.)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac8"
-          pattern ="^(.*?Best run away from .* while you can\!)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac9"
-          pattern ="^(.*?Challenging .* would be either very brave or very stupid\.)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac10"
-          pattern ="^(.* would crush you like a bug\!)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac11"
-          pattern ="^(.* would dance on your grave\!)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac12"
-          pattern ="^(.* says \'BEGONE FROM MY SIGHT unworthy\!\')$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <trigger title="ac13"
-          pattern ="^(.*?You would be completely annihilated by .*\!)$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="adapt_consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <!-- Trigger for when the player is alone in the room -->
-        <trigger title="playerOnly"
-          pattern ="^You see no one here but yourself\!$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="player_only" fireWhen="always" />
-          <gag />
-        </trigger>
-        <!-- Trigger for when the player is in a safe room -->
-        <trigger title="safeRoom"
-          pattern ="^Strange forces prevent violence here\.$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="safe_room" fireWhen="always" />
-          <gag />
-        </trigger>
-        <!-- Trigger for the end of consider -->
-        <trigger title="conw_off"
-          pattern ="^nhm$"
-          regexp="true" sequence="1" group="Cons" keepEvaluting="true">
-          <replace fireWhen="always"></replace>
-          <script function="Show_Consider" fireWhen="always" />
-          <gag />
-        </trigger>
-        <!-- Trigger for death of a mob with xp -->
-        <trigger title="mob_died_xpgained"
-          pattern ="^You receive .* experience points?\.$"
-          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
-          <script function="send_consider" fireWhen="always" />
-        </trigger>
-        <!-- Trigger for death of a mob with noxp toggled -->
-        <trigger title="mob_died_noxpgained"
-          pattern ="^You have set your character to receive no experience points!$"
-          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
-          <script function="send_consider" fireWhen="always" />
-        </trigger>
-        <!-- Trigger for death of a mob pointless kill -->
-        <trigger title="mob_died_pointless"
-          pattern ="^That was a pointless no-experience kill\!$"
-          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
-          <script function="send_consider" fireWhen="always" />
-        </trigger>
-        <!-- Trigger for fleeing mob -->
-        <trigger title="mob_fled"
-          pattern ="^A .* has fled\!$"
-          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
-          <script function="send_consider" fireWhen="always" />
-        </trigger>
-        <!-- Trigger for entering a new room -->
-        <trigger title="player_moved"
-          pattern ="^\[ Exits\:.*$"
-          regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
-          <script function="send_consider" fireWhen="always" />
-        </trigger>
-      </triggers>
-      <script name="bootstrap"><![CDATA[
-        Plugin_Dir = "/Shindo_lua"
-        dofile(GetPluginInstallDirectory()..Plugin_Dir.."/consider_backend.lua")
-        ]]>
-      </script>
-      <timers />
-    </plugin>
-  </plugins>
+					<body>
+						<h3>Room Consider Lister</h3)
+						<p>Creates a list from which to pick your target in the room.</p>
+						<p>see <b>conw help</b> for a summary of the commands.</p>
+					</body>
+				</html>
+				]]>
+			</description>
+			<aliases>
+				<alias pre="^conw (.*?)$" post="/Conw(&quot;$1&quot;)" enabled="true" />
+				<alias pre="^conw$" post="/send_consider()" enabled="true" />
+				<alias pre="^ck (\d+)$" post="/attack_considered(&quot;$1&quot;)" enabled="true" />
+				<alias pre="^ck$" post="/attack_considered()" enabled="true" />
+			</aliases>
+			<triggers>
+				<!-- Triggers for each of the consider messages -->
+				<trigger title="ac1"
+					pattern ="^(.*?You would stomp .* into the ground\.)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac2"
+					pattern ="^(.* would be easy\, but is it even worth the work out\?)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac3"
+					pattern ="^(.*?No Problem! .* is weak compared to you\.)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac4"
+					pattern ="^(.* looks a little worried about the idea\.)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac5"
+					pattern ="^(.* should be a fair fight\!)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac6"
+					pattern ="^(.* snickers nervously\.)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac7"
+					pattern ="^(.*? chuckles at the thought of you fighting .*\.)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac8"
+					pattern ="^(.*?Best run away from .* while you can\!)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac9"
+					pattern ="^(.*?Challenging .* would be either very brave or very stupid\.)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac10"
+					pattern ="^(.* would crush you like a bug\!)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac11"
+					pattern ="^(.* would dance on your grave\!)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac12"
+					pattern ="^(.* says \'BEGONE FROM MY SIGHT unworthy\!\')$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<trigger title="ac13"
+					pattern ="^(.*?You would be completely annihilated by .*\!)$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="adapt_consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<!-- Trigger for when the player is alone in the room -->
+				<trigger title="playerOnly"
+					pattern ="^You see no one here but yourself\!$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="player_only" fireWhen="always" />
+					<gag />
+				</trigger>
+				<!-- Trigger for when the player is in a safe room -->
+				<trigger title="safeRoom"
+					pattern ="^Strange forces prevent violence here\.$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="safe_room" fireWhen="always" />
+					<gag />
+				</trigger>
+				<!-- Trigger for the end of consider -->
+				<trigger title="conw_off"
+					pattern ="^nhm$"
+					regexp="true" sequence="1" group="Cons" keepEvaluting="true">
+					<replace fireWhen="always"></replace>
+					<script function="Show_Consider" fireWhen="always" />
+					<gag />
+				</trigger>
+				<!-- Trigger for death of a mob with xp -->
+				<trigger title="mob_died_xpgained"
+					pattern ="^You receive .* experience points?\.$"
+					regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+					<script function="send_consider" fireWhen="always" />
+				</trigger>
+				<!-- Trigger for death of a mob with noxp toggled -->
+				<trigger title="mob_died_noxpgained"
+					pattern ="^You have set your character to receive no experience points!$"
+					regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+					<script function="send_consider" fireWhen="always" />
+				</trigger>
+				<!-- Trigger for death of a mob pointless kill -->
+				<trigger title="mob_died_pointless"
+					pattern ="^That was a pointless no-experience kill\!$"
+					regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+					<script function="send_consider" fireWhen="always" />
+				</trigger>
+				<!-- Trigger for fleeing mob -->
+				<trigger title="mob_fled"
+					pattern ="^A .* has fled\!$"
+					regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+					<script function="send_consider" fireWhen="always" />
+				</trigger>
+				<!-- Trigger for entering a new room -->
+				<trigger title="player_moved"
+					pattern ="^\[ Exits\:.*$"
+					regexp="true" sequence="1" group="Auto_Conw" keepEvaluting="true">
+					<script function="send_consider" fireWhen="always" />
+				</trigger>
+			</triggers>
+			<script name="bootstrap"><![CDATA[
+				Plugin_Dir = "/Shindo_lua"
+				dofile(GetPluginInstallDirectory()..Plugin_Dir.."/consider_backend.lua")
+				]]>
+			</script>
+			<timers />
+		</plugin>
+	</plugins>
 </blowtorch>
 
