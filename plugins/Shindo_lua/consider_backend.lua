@@ -45,6 +45,7 @@ local version = "0.1.5"
 local targT = {}
 local targCount = 0
 local ECHO_CONSIDER = 0
+local FORSKILL = 1
 
 local consider_messages = {
 	["You would stomp (.+) into the ground%."] =
@@ -91,6 +92,7 @@ function Conw (argu)
 			"conw echo - toggle echoing consider message in colour.",
 			"conw <word> - set default command.",
 			"conw auto - toggle auto update consider window on room entry and after combat.",
+			"conw skill - toggle between skill and spell user mode.",
 			"conw ?/help - show this help.",
 			"ck <number> - attack mob number <number> in the list generated.",
 			"ck - show the last generated list of mobs."
@@ -135,6 +137,18 @@ function Conw (argu)
 		return
 	end -- toggle auto
 
+	if argu == "skill" then
+		if FORSKILL == 1 then
+			FORSKILL = 0
+			Note(string.format ("%sSwitching to spell user mode.%s\n", bblue, dwhite))
+		else
+			FORSKILL = 1
+			Note(string.format ("%sSwitching to skill user mode.%s\n", bblue, dwhite))
+		end
+
+		return
+	end -- toggle auto
+
 	--[[  if argu and argu:match ("^%w+$") then --]]
 	if argu and argu:match ("^.+$") then
 		default_command = argu
@@ -146,7 +160,11 @@ function attack_considered(targNum)
 	if targNum == nil then Show_Consider() return end
 	targNum = tonumber(targNum) or 0
 	if (targNum > 0) and (targNum < targCount + 1) then
-		SendToServer(string.format("%s \'%s\'", default_command, targT[targNum].keyword))
+		if (FORSKILL == 0) then
+			SendToServer(string.format("%s \'%s\'", default_command, targT[targNum].keyword))
+		else
+			SendToServer(string.format("%s %s", default_command, targT[targNum].keyword))
+		end
 		--SendToServer(string.format("echo %s \'%s\'", default_command, targT[targNum].keyword))
 	else
 		Note(string.format("%sYou need to select a number from 1 to %s%s\n", dyellow, targCount, dwhite))
